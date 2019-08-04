@@ -38,7 +38,17 @@ Often the testing set is set aside in advance, and cross validation technique is
 
 2. Even if there is no risk of information leak when doing cross validation, we cannot make the assumption that time does not play a part in the pattern in which fraudulent activities occur. No prior knowledge or evidence is available to make such assumption.
 
+As for the classification algorithm, Random-Forest is adpoted because it's convenient to conduct feature selection with it. Random-Forest is basically a collection of randomly generated decision trees. Decision Tree are non-parametric supervised learning algorithm. It doesn't require much preprocessing of the data and deals well with missing values. A decision tree is a set of rules that split the dataset into different subsets(called leaves). Each time the tree splits the data in current node by one of the attributes. The tree does not stop splitting the dataset unless prior restriction is given and met. Conventionally, decision trees are grown and then pruned to a smaller depth to avoid overfitting. Despite the "max depth", "max number features" or "min leaf node" constraints set to overcoming overfitting in decision trees, one single tree tends to bring in too much bias into the model. As Random-forest takes the average "opinion" of many randomly generate trees, its predictions have less bias, lower variance and more consistent. 
+
 ### 4. Analyses and Results
+Since the time-span of this dataset is not very long, most claims are made by existing customers(those already in the company's database). In the short run, these claims are prevelant as the customers' insurance policies hasn't expired yet ,with new customers coming in slowly. However, in the long run, customers will come and go, and claims made by new incoming customers deserve special attention, as their claim history is unknown. Therefore, this reprot aim to solve 2 sub-problems of insurance fraud deteciton: 
+
+1. Given all the predictors including the claim history of each customer, predict as accurate as possible whether or not an incoming claim is fradulent. 
+
+2. Treat each customer as a new customer and try to predict whether or not an incoming new case is fradulent. 
+
+These two sub-problems describe two ends of a specturm. In reality, the situaion would fall somewhere in between, depending on how quicky the companies' policies expire. The real-time fraud-detector would have to deal with both cases, the new customers as well as current ones. 
+
 
 
 
