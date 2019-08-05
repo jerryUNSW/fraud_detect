@@ -57,39 +57,7 @@ The following assumptions are made on this dataset:
 
 2. For the majority of the customers, their identities do not change over time. We assume that most normal customers would never start any fraudulent activities, at least not under the same customer ID. We also assume that most frauds would not turn from their wrongdoings and start making legitimate claims, at least not under the same ID. This assumption can be validated through the following analysis:
 
-different platforms have different fraud ratios 
 
-<img src="by_platform.png" width="500" height="500"/>
-
-3. The occurrence o
-
-different platforms have different fraud ratios 
-
-<img src="by_platform.png" width="500" height="500"/> This means that the information associated with a c
-
-different platforms have different fraud ratios 
-
-<img src="by_platform.png" width="500" height="500"/>
-
-As shown in the pie
-
-different platforms have different fraud ratios 
-
-<img src="by_platform.png" width="500" height="500"/>stomers whose claims got denied and accepted at differe
-
-different platforms have different fraud ratios 
-
-<img src="by_platform.png" width="500" height="500"/>mall proportion of the population. For the rest of the custome
-
-different platforms have different fraud ratios 
-
-<img src="by_platform.png" width="500" height="500"/>ed or always got accepted.
-
-// there should be 
-
-different platforms have different fraud ratios 
-
-<img src="by_platform.png" width="500" height="500"/>
 
 Based on assumption 2, if an existing customer makes a new claim, the claim history tells us a lot about whether the incoming claim is fraud or not. We define an additional feature for each incoming claim case, "number of denials". For each claim case along with a time stamp, this feature shows how many times a customer's claims got denied by that time stamp. For example, if a person got denied 5 times (although this is unlikely in the dataset), the "number of denials" for the 5 incoming cases should be 0,1,2,3,4, indicating how many times the person were denied already.
 
