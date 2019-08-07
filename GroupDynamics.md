@@ -29,5 +29,5 @@ The communication between us has been smooth. We always have an open-minded abou
 
 5. What I have learned from teammwork experience
 
-What I have learned from working with Weijie is that even when different people have different skillsets, they can always find a way to work together as long as they are both committed to the same goal. From the first day we met, we knew that we are very different people. 
+What I have learned from working with Weijie is that even when different people have different skillsets, they can always find a way to work together as long as they are both committed to the same goal. From the first day we met, we knew that we are very different people. We are good at different things and we approach the problem from different angles. However, our differences does not become an obstable between us. On the contrary, we found a way to complement each other by doing the thigs we are good at. This is not always the case when it comes to teammwork, but it is this way for us because we both make an effort to make it so. 
 
