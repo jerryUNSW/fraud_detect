@@ -25,7 +25,7 @@ I am from the computational stream so I am mainly responsible for the coding par
 
 4. Communication
 
-The communication between us has been smooth. We always have an open-minded about each others' new ideas. Even when we don't 100 percent agree with other, we would either test out the ideas and compare them, or seek advice from our instructors. We both try to be as friendly and cooperative as possible, which was not difficult because we are both responsible and committed. If one of us is expected to be late for a lab session, he or she would send a text to the other person in advance. If there is an upcoming due or deadline in this course, we often remind the other person of it as well. We value each other's strength and always treat each other in a respectful manner. 
+The communication between us has been smooth. We always have an open-minded about each others' new ideas. Even when we don't 100 percent agree with other, we would either test out the ideas and compare them, or seek advice from our instructors. We always have been friendly and cooperative to each other, which was not difficult because we are both responsible and committed. If one of us is expected to be late for a lab session, he or she would send a text to the other person in advance. If there is an upcoming due or deadline in this course, we often remind the other person of it as well. We value each other's strength and always treat each other in a respectful manner. 
 
 5. What I have learned from teammwork experience
 
