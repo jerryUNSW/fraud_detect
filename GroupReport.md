@@ -106,7 +106,24 @@ As shown above, the fraud ratios across different platforms are not alike. A not
 
 #### 4.2 Modelling and Results
 
-##### 4.2.1
+##### 4.2.1 Subproblem 1
+In this part we fit a decision tree to classify the incoming claims. The following pie charts demonstrate the conditional probabilities that are relevant to our model. 
+$$
+\begin{aligned}
+    P( fraud | matched \ time \ stamp ) &= \frac{P(fraud \ \& matched \ time \ stamp)}{P(matched \ time \ stamp)}  \\
+                  &= \frac{|fraud \ \& matched \ time \ stamp|/|all\ cases|}{|matched \ time \ stamp|/|all\ cases|} \\
+                  &= \frac{|fraud \ \& matched \ time \ stamp|}{|matched \ time \ stamp|} \\
+                  &= 84 \%
+\end{aligned}
+$$
+$$
+\begin{aligned}
+    P( fraud | \ denied \ before) &= \frac{P(fraud \ \& \ denied \ before)}{P(denied \ before)}  \\
+                  &= \frac{|fraud \ \& \ denied \ before|/|all\ cases|}{|denied \ before|/|all\ cases|} \\
+                  &= \frac{|fraud \ \& \ denied \ before|}{|matched \ time \ stamp|} \\
+                  &= 97.7 \%
+\end{aligned}
+$$
 <table style="width:100%">
   <tr>
     <td>
@@ -118,13 +135,19 @@ As shown above, the fraud ratios across different platforms are not alike. A not
   </tr>
 </table>
 
+With these two predictors, we build the following decision tree. As shown in the tree below, all the leaf nodes have pure labels (either all frauds or all normal). It means that this tree is able to classify all the incoming cases correctly. This is not surpirsing and it vadlidates our assumption that a customer's identity does not change over time. The classifier can be built on as little as the first 5% of the dataset and still produce this result, because it would have enough claim history of customers to know if a claim associated with a customer ID is fraud or not. In reality, if the fraudulent activities become more complex, the classifier needs more features to make correct predictions. However, we believe this model mimics how companies process frauds in the short run: when the majority of claims are made by existing customers, looking at the claim history is the rational choice. 
+
+
 
 <center>
 <img src="tree.png" width="350" height="350"/>
 </center>
 
-##### 4.2.2
-In this part, a Random Forest classifier is built to predict frauds. Random Forests are less biased and can produce more consistent results. The results are equally easy to interpret. Since it is a bit more complicated than a single decision tree, the optimal parameters of a Random Forest need to be decided. First we need to find out how many decision trees we need to grow in order to effectively reduce bias. In theory the more trees we have, the more consistent the results will be. However, a model too complicated would take too long to fit and need more data. 
+##### 4.2.2 Subproblem 2
+
+In this section, the claim history of each customer is not considered. We focus on giving customers correct labels instead of incoming cases. If a customer in this dataset has never made a false claim, the label "normal" is assigned. Otherwise, 
+
+In this part, a Random Forest classifier is built to predict fraudulent customers. Random Forests are less biased and can produce more consistent results. The results are equally easy to interpret. Since it is a bit more complicated than a single decision tree, the optimal parameters of a Random Forest need to be decided. First we need to find out how many decision trees we need to grow in order to effectively reduce bias. In theory the more trees we have, the more consistent the results will be. However, a model too complicated would take too long to fit and need more data. 
 
 Follwing is a result from a one-dimensional grid-search. For each number of trees, we calculate the performance metric, area under ROC curve (later referred to as ROC score) from cross validation. 
 <center>
@@ -148,38 +171,51 @@ The above algorithm produces a ROC score for all possible parameter combinations
 <center>
 <img src="gridSearch2.png"  width="500"/>
 </center>
-As shown, when the "max_feature" is 5 and "max_depth" is 3, the performance metric is optimised in the restricted parameter space. Therefore, these parameters along with "n_estimator" (number of trees grown in the random forest) being 4 will be used to train the final model. 
+As shown, when the "max_feature" is 5 and "max_depth" is 3, the performance metric is optimised in the restricted parameter space. Therefore, these parameters along with "n_estimator" (number of trees grown in the random forest) being 4 will be used to train the final model. The final model is built on the whole training set and performance metrics will be calculated on the test set. The actual decision trees in the random forests are attached in Appendix 1. 
+
+$$ TNR = \frac{TrueNegative}{TrueNegative+FalsePositive} = 98.83\% $$
+
+$$ TPR = \frac{TruePositive}{TruePositives+FalseNegative} = 100\% $$
+The True Positive Rate (TPR) and True Negative Rate (TNR) show that the final classifier does a good job identifying the fraudulent customer, as well as not misclassifying normal people.
+
+<table >
+  <tr>
+    <td>features</td>
+    <td>importance</td> 
+  </tr>
+<tr>
+    <td>matched_payment_complete</td>
+    <td>0.994826</td> 
+</tr>
+<tr>
+    <td>platform</td>
+    <td>0.004539</td> 
+</tr>
+<tr>
+    <td>square_footage</td>
+    <td>0.000379</td> 
+</tr>
+<tr>
+    <td>suburb</td>
+    <td>0.000143</td> 
+</tr>
+</table>
+The top 5 features are displayed above. Obviously, "matched_payment_complete" is the most important feature. We have shown that all the fradulent claims have this feature. The fraudulent customers' behaviour resemble the behaviour of bots, which explains why these customers can start a claim at the exact same time when they completed the payment for the insurance policy. "Platform" is somewhat important because none of the fraudulent claims are made over the phone. All of the fraud claims are made on the internet.
 
 
-<center>
-<img src="0.png" width="800" height="400"/>
-<img src="1.png" width="800" height="400"/>
-<img src="2.png" width="500" height="400"/>
-<img src="3.png" width="800" height="400"/>
-</center>
-
-##### 4.2.3
+##### 4.2.3 Subproblem 3
 We need to examine the economic implications of abovementioned classifiers. From a business point of view, the loss from a fraud detection system comes from two sources, the false positives and the false negatives. The false negatives are the frauds who got away with their wrongdoings and are paid coverage by the insurance company. The loss associated with them is the amount of money paid as coverage. The loss associated with the false positives is harder to explicitly measure. The false positives are people making normal claims, desersing to be compensated but got denied by this model. It does not incur loss to the company directly but it stains the company's reputation and credibility. In reality, this automated fraud detection model should merely serve as a initial filter. Based on the customers' intercations with the database, it produces a list of "identified frauds", which will be examined by the company's professional investigators thoroughly. This will, to the greatest extent, elimilate the loss incurred by false positives.
 
 We attempt to estimate the potential loss generated by the false negatives. For each claim case denied, the coverage that could have been paid to the customer should the case wasn't denied is not available in this dataset. Fortunately, for each claim accepted, the coverage paid to the customer is accessible. A regression model can be built to fit the coverage on the home information ("home_type","number of bedrooms","square_footage") provided. Then we can estimate the amount of money that could have been paid to a fradulent customer, if he or she is misclassified as a normal customer. 
 
-Some explorative analysis suggests that square footage of a home is the only signiifcant predictor of coverage. Below is a scatterplot of coverage vs square footage of the house, alongwith he R output of the regression model.
-
-A linear relationship is clearly displayed. 
+Some explorative analysis suggests that square footage of a home is the only signiifcant predictor of coverage. Below is a scatterplot of coverage vs square footage of the house, alongwith he R output of the regression model. A linear relationship is clearly displayed. 
 
 <center>
 <img src="Rplot.png"  width="400"/>
 </center>
-<code>
+<img src="ROutput.png"  width="500"/>
 
-Call:
-lm(formula = paid_amount ~ square_footage, data = money_vs_payload)
-Coefficients:
-   (Intercept)  square_footage  
-       1262.36           25.04 
-</code>
-
-Since the true positive rate of both classifers are 100%, all of the fraudulent claims are identified. The estimated money saved on coverage is:
+The Adjusted R-squared of this regression model is almost 90%. This is an indication that this model is a good fit. Since the true positive rate of both classifers are 100%, all of the fraudulent claims are identified. We sum up all the estimated coverage of each denied claim.  The total estimated money saved on coverage is:
 
 $$
 \begin{aligned}
@@ -188,11 +224,11 @@ $$
 \end{aligned}
 $$
 
-An alernative way of estimating the money saved on coverage is:
+An alernative way of estimating the money saved on coverage is to take advantage of the coverage distribution. 
 $$
 \begin{aligned}
     \sum \hat{y_i} &= N \times \hat{\bar{y}}  \\
-                  &= rr \\
+                  &= 10459 \times 8710.88 \\
                   &= 91107138.29375029
 \end{aligned}
 $$
@@ -201,3 +237,21 @@ This results of these two independent approaches agree, which means that about 9
 
 useful references
 https://www.sciencedirect.com/science/article/pii/S0020025511006773
+
+
+### Appendix 1: Graphs
+
+Decision trees in the final Random Forest:
+1. First decision tree
+<img src="0.png" width="800" height="400"/>
+
+2. Second decision tree
+<img src="1.png" width="800" height="400"/>
+
+3. Third decision tree
+<img src="2.png" width="500" height="400"/>
+
+4. Fourth decision tree
+<img src="3.png" width="800" height="400"/>
+
+### Appendix 2: Code
