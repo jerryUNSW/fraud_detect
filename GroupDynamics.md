@@ -3,7 +3,7 @@
 
 *****
 
-There are only two members in our team. It has been a pleasure working with my only teammate Weijia Liu. I think it's because we are both passionate about data science and are problem-oriented people. We are both excited to take advantage of this opportunity to apply our knowledge in statistics and computer science to a real world problem. In this report I will share my perspectives on our teamwork
+There are only two members in our team. It has been a pleasure working with my only teammate. I think it's because we are both passionate about data science and are problem-oriented people. We are both excited to take advantage of this opportunity to apply our knowledge in statistics and computer science to a real world problem. In this report I will share my perspectives on our teamwork
 in different aspects, including progress checking, commitment, job allocation and communication. 
 
 1. Progress Checking
@@ -19,7 +19,7 @@ I believe we are two committed, organised individuals. We always try to be on to
 
 We always go through the work together and I feel like we are complementary. We make the big decisions together, including how to define our problems, how to do data cleanining, which models to include in our report and how to best present our results. 
 
-Weijia is mainly responsible for literature review. She read many research papers on the subject matter and helped us figure out which methods the academia or the industry are already using. She does a good job in keeping a record of what's done and what's to be done. She also made the flowcharts to explain our data cleaning process. Weijia is not directly responsible for coding but her clear understanding of the problem and her critical thinking always help us get through the difficulties.
+My teammate is mainly responsible for literature review. She read many research papers on the subject matter and helped us figure out which methods the academia or the industry are already using. She does a good job in keeping a record of what's done and what's to be done. She also made the flowcharts to explain our data cleaning process. My teammate is not directly responsible for coding but her clear understanding of the problem and her critical thinking always help us get through the difficulties.
 
 I am from the computational stream so I am mainly responsible for the coding part of the project. I wrtie shell command to clean the data, use Jupyter Notebook to build classfication models, visualise the dataset and results from the model, and organise the report in a markdown file. I also used a little bit of Rstudio to run the linear regression model. I also read some research papers about machine learning and cross validation to back up my reasoning and logic.
 
@@ -29,5 +29,5 @@ The communication between us has been smooth. We always have an open-minded abou
 
 5. What I have learned from teammwork experience
 
-What I have learned from working with Weijie is that even when different people have different skillsets, they can always find a way to work together as long as they are both committed to the same goal. From the first day we met, we knew that we are very different people. We are good at different things and we approach the problem from different angles. However, our differences does not become an obstable between us. On the contrary, we found a way to complement each other by doing the thigs we are good at. This is not always the case when it comes to teammwork, but it is this way for us because we both make an effort to make it so. 
+What I have learned from working with my teammate is that even when different people have different skillsets, they can always find a way to work together as long as they are both committed to the same goal. From the first day we met, we knew that we are very different people. We are good at different things and we approach the problem from different angles. However, our differences does not become an obstable between us. On the contrary, we found a way to complement each other by doing the thigs we are good at. This is not always the case when it comes to teammwork, but it is this way for us because we both make an effort to make it so. 
 
